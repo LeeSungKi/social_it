@@ -5,6 +5,8 @@ const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL || 'https://leesungki.github.i
 const BASE = '/social_it/'
 const FULL_URL = `${SITE_URL}${BASE}`
 const OG_IMAGE = `${FULL_URL}images/logo.png`
+// Cache-bust for social scrapers (Kakao, Facebook, etc.)
+const OG_IMAGE_VERSION = `${OG_IMAGE}?v=20251213`
 const FAVICON = `${FULL_URL}favicon.ico`
 
 export default defineNuxtConfig({
@@ -24,20 +26,24 @@ export default defineNuxtConfig({
         { property: 'og:description', content: "Social It - 감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: FULL_URL },
-        { property: 'og:image', content: OG_IMAGE },
-        { property: 'og:image:secure_url', content: OG_IMAGE },
+        { property: 'og:image', content: OG_IMAGE_VERSION },
+        { property: 'og:image:secure_url', content: OG_IMAGE_VERSION },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { property: 'og:image:alt', content: 'Social It 로고' },
         { property: 'og:site_name', content: 'Social It' },
         { property: 'og:locale', content: 'ko_KR' },
+        { property: 'og:updated_time', content: new Date().toISOString() },
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Social It - Social Matching Party' },
         { name: 'twitter:description', content: "Social It - 감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
-        { name: 'twitter:image', content: OG_IMAGE },
+        { name: 'twitter:url', content: FULL_URL },
+        { name: 'twitter:image', content: OG_IMAGE_VERSION },
+        { name: 'twitter:image:alt', content: 'Social It 로고' },
       ],
       link: [
+        { rel: 'canonical', href: FULL_URL },
         { rel: 'icon', type: 'image/x-icon', href: FAVICON },
         { rel: 'shortcut icon', type: 'image/x-icon', href: FAVICON },
         { rel: 'apple-touch-icon', href: OG_IMAGE }
