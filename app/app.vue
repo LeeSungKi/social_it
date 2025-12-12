@@ -883,6 +883,7 @@ function closeNotif() {
 }
 async function submitNotif() {
   if (!canSubmitNotif.value) return
+
   const email = notifEmail.value.trim()
 
   try {
@@ -891,16 +892,25 @@ async function submitNotif() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     })
+
     const data = await res.json().catch(() => ({}))
-    if (res.ok && (data?.ok !== false)) {
-      // success
+
+    if (res.ok && data?.ok) {
+      alert('✅ 구독이 완료되었습니다!\n소식을 빠르게 전해드릴게요.')
       closeNotif()
       setTimeout(() => { notifEmail.value = '' }, 200)
-    } else {
-      alert(data?.message || '구독 실패')
+      return
     }
-  } catch (e) {
-    alert('오류가 발생했습니다')
+
+    if (res.status === 409) {
+      alert('ℹ️ 이미 구독된 이메일입니다.')
+      return
+    }
+
+    alert(data?.message || '구독에 실패했습니다.')
+  } catch {
+    alert('네트워크 오류가 발생했습니다.')
   }
 }
+
 </script>

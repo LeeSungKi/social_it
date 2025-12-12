@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NUXT_PUBLIC_SUBSCRIBE_ENDPOINT: "https://social-it-subscribe.netlify.app/.netlify/functions/subscribe"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
