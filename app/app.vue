@@ -340,7 +340,7 @@
           <section class="mt-8 flex items-center justify-center gap-8 pb-6">
             <a
                 class="text-white/90 hover:text-white"
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/kuro_pa"
                 target="_blank"
                 rel="noopener"
                 aria-label="Instagram"
@@ -367,7 +367,7 @@
 
             <a
                 class="text-white/90 hover:text-white"
-                href="https://open.kakao.com/o/sqUACRFh"
+                href="https://open.kakao.com/o/syP6Bi6h"
                 target="_blank"
                 rel="noopener"
                 aria-label="카카오톡"
