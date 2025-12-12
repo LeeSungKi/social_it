@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
-  ssr: true,  // 추가
+  ssr: false,  // 추가
   app: {
     baseURL: BASE,   // ★ 저장소 이름
     buildAssetsDir: '/_nuxt/', // 기본값이지만 명시해도 됨
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         { property: 'og:description', content: "Social It - 감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: FULL_URL },
-        { property: 'og:image', content: OG_IMAGE_VERSION },
+        { property: 'og:image', content: OG_IMAGE },
         { property: 'og:image:secure_url', content: OG_IMAGE_VERSION },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
