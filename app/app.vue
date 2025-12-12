@@ -477,7 +477,7 @@
               <div class="mx-auto max-w-[260px] truncate text-sm text-white/90">{{ shareLink }}</div>
               <button type="button" class="mt-2 inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[12px] font-medium text-black active:scale-[0.98]" @click="copyShareLink">
                 <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                복사
+                링크 복사
               </button>
             </div>
           </div>
@@ -665,7 +665,7 @@ function lockScroll(lock: boolean) {
 
 // ---- Share modal ----
 const showShare = ref(false)
-const shareLink = location?.href ?? ''
+const shareLink = location?.href + 'og.html/'
 const qrUrl = computed(() => {
   // use Google Chart API-like QR service via api.qrserver
   const encoded = encodeURIComponent(shareLink)
