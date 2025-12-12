@@ -665,7 +665,7 @@ function lockScroll(lock: boolean) {
 
 // ---- Share modal ----
 const showShare = ref(false)
-const shareLink = location?.href + 'og.html/'
+const shareLink = location?.href + 'og.html'
 const qrUrl = computed(() => {
   // use Google Chart API-like QR service via api.qrserver
   const encoded = encodeURIComponent(shareLink)
