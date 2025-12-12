@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   ssr: false,  // 추가
+  app: {
+    baseURL: '/social_it/',   // ★ 저장소 이름
+    buildAssetsDir: '/_nuxt/' // 기본값이지만 명시해도 됨
+  },
   nitro: {
     prerender: {
       routes: ['/']
