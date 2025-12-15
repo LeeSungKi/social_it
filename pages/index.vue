@@ -612,10 +612,9 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import rawSchedules from '../data/schedules.json'
+import rawSchedules from '~/data/schedules.json'
 
 // ---- BaseURL-aware asset helper & 배경 ----
 const runtimeCfg = useRuntimeConfig()
@@ -665,7 +664,7 @@ function lockScroll(lock: boolean) {
 
 // ---- Share modal ----
 const showShare = ref(false)
-const shareLink = location?.href + 'og.html'
+const shareLink = (typeof location !== 'undefined' ? location.href : '') + 'og.html'
 const qrUrl = computed(() => {
   // use Google Chart API-like QR service via api.qrserver
   const encoded = encodeURIComponent(shareLink)
@@ -895,7 +894,7 @@ async function submitNotif() {
 
     const data = await res.json().catch(() => ({}))
 
-    if (res.ok && data?.ok) {
+    if (res.ok && (data as any)?.ok) {
       alert('✅ 구독이 완료되었습니다!\n소식을 빠르게 전해드릴게요.')
       closeNotif()
       setTimeout(() => { notifEmail.value = '' }, 200)
@@ -907,10 +906,9 @@ async function submitNotif() {
       return
     }
 
-    alert(data?.message || '구독에 실패했습니다.')
+    alert((data as any)?.message || '구독에 실패했습니다.')
   } catch {
     alert('네트워크 오류가 발생했습니다.')
   }
 }
-
 </script>

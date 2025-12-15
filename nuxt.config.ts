@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
+  css: ['~/assets/css/animations.css'],
   ssr: false,  // 추가
   app: {
     baseURL: BASE,   // ★ 저장소 이름
@@ -46,7 +47,15 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: FULL_URL },
         { rel: 'icon', type: 'image/x-icon', href: FAVICON },
         { rel: 'shortcut icon', type: 'image/x-icon', href: FAVICON },
-        { rel: 'apple-touch-icon', href: OG_IMAGE }
+        { rel: 'apple-touch-icon', href: OG_IMAGE },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Pen+Script&display=swap'
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css'
+        }
       ],
     },
   },
@@ -59,7 +68,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/']
+      routes: ['/', '/newYearParty']
     }
   }
 })
