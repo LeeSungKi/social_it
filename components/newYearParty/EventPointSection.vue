@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="pl-1 space-y-1">
-            <div class="feature-item"><div class="check-dot"></div><p class="text-gray-300 text-xs">테이블별 와인 페어링 &amp; 안주</p></div>
+            <div class="feature-item"><div class="check-dot"></div><p class="text-gray-300 text-xs">테이블별 소토닉 페어링 &amp; 핑거푸드</p></div>
             <div class="feature-item"><div class="check-dot"></div><p class="text-gray-300 text-xs">대화가 끊이지 않는 '대화카드'</p></div>
             <div class="feature-item"><div class="check-dot"></div><p class="text-gray-300 text-xs">어색함 제로! 아이스브레이킹 게임</p></div>
           </div>
