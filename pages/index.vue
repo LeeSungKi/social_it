@@ -13,6 +13,8 @@ import { useRoute } from 'vue-router'
 // --- state
 const mobileOpen = ref(false)
 const scrolled = ref(false)
+// entrance flag for hero (run once)
+const heroEntered = ref(false)
 // Timer for intro slideshow (declare early to avoid TDZ)
 let introTimer: any = null
 
@@ -66,6 +68,8 @@ onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
   // Start intro slideshow
   startIntroTimer()
+  // Trigger hero entrance once after mount
+  setTimeout(() => { heroEntered.value = true }, 60)
   // Responsive threshold for meeting cards
   updateIsMobile()
   window.addEventListener('resize', updateIsMobile)
@@ -205,9 +209,9 @@ const visibleMeetingCards = computed(() => {
 })
 
 const headerClass = computed(() => {
-  // Hero 위에서는 투명 / 스크롤 후에는 반투명 다크 + 블러
+  // Hero 위에서는 투명 / 스크롤 후에는 반투명 다크 + 블러 + subtle shadow
   return scrolled.value
-      ? 'bg-black/65 backdrop-blur border-b border-white/10'
+      ? 'bg-black/65 backdrop-blur border-b border-white/10 shadow-lg shadow-black/20'
       : 'bg-transparent'
 })
 // ---- Runtime config for subscribe endpoint ----
@@ -327,7 +331,7 @@ async function submitNotif() {
       <img
           :src="images.hero"
           alt="SOCIAL IT Hero"
-          class="absolute inset-0 w-full h-full object-cover object-top"
+          class="absolute inset-0 w-full h-full object-cover object-top hero-kenburns"
       />
 
       <!-- Overlay (dark + subtle gradient) -->
@@ -338,7 +342,7 @@ async function submitNotif() {
       <div class="pointer-events-none absolute -bottom-24 -left-1/2 h-[160px] w-[140%] -rotate-6 bg-white/5 blur-[100px]"></div>
 
       <!-- HEADER -->
-      <header class="fixed top-0 left-0 w-full z-50 transition-colors duration-200" :class="headerClass">
+      <header class="fixed top-0 left-0 w-full z-50 header-smooth" :class="headerClass">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
           <div class="relative flex h-16 md:h-20 items-center justify-between">
             <!-- Mobile: left Share button -->
@@ -417,20 +421,35 @@ async function submitNotif() {
       <div class="relative z-10 h-full flex items-center">
         <div class="max-w-6xl mx-auto w-full px-4 sm:px-6 pt-16 md:pt-20">
           <div class="text-center">
-            <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2 text-sm sm:text-base text-white/90 border border-white/10">
+            <p
+              class="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2 text-sm sm:text-base text-white/90 border border-white/10 hero-item"
+              :class="heroEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+              :style="{ transitionDelay: '0ms' }"
+            >
               <span class="h-2 w-2 rounded-full bg-white/80"></span>
               {{ brand.tagline }}
             </p>
 
-            <h1 class="mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter font-serif">
+            <h1
+              class="mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter font-serif hero-item"
+              :class="heroEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+              :style="{ transitionDelay: '100ms' }"
+            >
               {{ brand.name }}
             </h1>
-            <p class="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/95 font-medium">
+            <p
+              class="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/95 font-medium hero-item"
+              :class="heroEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+              :style="{ transitionDelay: '200ms' }"
+            >
               감각적인 공간에서 시작되는 새로운 만남.<br />
               부담 없이, 자연스럽게, 그리고 설레게.
             </p>
 
-            <div class="mt-12 flex items-center justify-center gap-3">
+            <div class="mt-12 flex items-center justify-center gap-3 hero-item"
+                 :class="heroEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
+                 :style="{ transitionDelay: '300ms' }"
+            >
               <a
                   href="#meetings"
                   class="inline-flex items-center justify-center rounded-full bg-white text-black px-7 py-3.5 text-base font-semibold hover:bg-white/90 transition"
@@ -452,7 +471,7 @@ async function submitNotif() {
     <!-- BRAND INTRO (2-column, image-first feel) -->
     <section class="py-16 sm:py-20 bg-black">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-        <div>
+        <div v-reveal.up>
           <h2 class="text-3xl sm:text-4xl font-bold leading-snug font-serif">
             하나의 공간, <br /> 하나의 주제,<br />
             새로운 만남.
@@ -498,7 +517,8 @@ async function submitNotif() {
               class="absolute inset-0 transition-opacity duration-700"
               :class="i === introIndex ? 'opacity-100' : 'opacity-0'"
           >
-            <img :src="src" alt="Intro slide" class="w-full h-full object-cover" />
+            <img :src="src" alt="Intro slide" class="w-full h-full object-cover"
+                 :style="i === introIndex ? 'transform: scale(1.03); transition: transform 3500ms linear;' : 'transform: scale(1); transition: transform 450ms ease-out;'" />
           </div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
 
@@ -562,15 +582,18 @@ async function submitNotif() {
               class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30"
               :class="c.disabled ? 'pointer-events-none opacity-60' : ''"
               aria-label="meeting card"
+              v-reveal.up="{ delay: idx * 80 }"
           >
             <!-- image -->
             <img
                 :src="c.img"
                 :alt="c.title"
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
             />
-            <!-- overlay -->
+            <!-- overlay base gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/20"></div>
+            <!-- subtle hover darken overlay -->
+            <div class="absolute inset-0 bg-black/0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
 
             <!-- badge -->
             <div v-if="c.badge" class="absolute top-5 left-5">
@@ -581,7 +604,7 @@ async function submitNotif() {
 
             <!-- content -->
             <div class="relative z-10 flex h-[280px] sm:h-[320px] flex-col justify-end p-6">
-              <h4 class="text-2xl font-semibold tracking-tight">{{ c.title }}</h4>
+              <h4 class="text-2xl font-semibold tracking-tight transition-all duration-300 group-hover:tracking-wide">{{ c.title }}</h4>
               <p class="mt-2 text-white/80 text-sm">{{ c.desc }}</p>
             </div>
           </a>
@@ -617,10 +640,10 @@ async function submitNotif() {
               v-for="(r, idx) in reviews"
               :key="idx"
               :href="r.href"
-              class="group overflow-hidden rounded-3xl border border-white/10 bg-white/5"
+              class="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/30"
           >
             <div class="relative">
-              <img :src="r.img" alt="review" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
+              <img :src="r.img" alt="review" class="h-56 w-full object-cover" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
             </div>
             <div class="p-5">
@@ -668,7 +691,7 @@ async function submitNotif() {
     >
       <div class="relative">
         <div class="absolute -inset-1 rounded-full bg-yellow-300/50 blur-lg opacity-60 group-hover:opacity-80 transition"></div>
-        <div class="relative flex items-center gap-0 sm:gap-3 rounded-full p-3.5 sm:px-4 sm:py-3 shadow-lg border border-black/10 bg-[#FEE500] text-black">
+        <div class="relative flex items-center gap-0 sm:gap-3 rounded-full p-3.5 sm:px-4 sm:py-3 shadow-lg border border-black/10 bg-[#FEE500] text-black kakao-idle">
           <!-- Kakao bubble icon -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
             <path d="M12 3C6.477 3 2 6.58 2 10.99c0 2.61 1.57 4.92 3.988 6.41l-.9 3.35a.6.6 0 00.86.69l3.85-2.02c.727.13 1.484.2 2.255.2 5.523 0 10-3.58 10-7.99S17.523 3 12 3z"/>
@@ -678,7 +701,7 @@ async function submitNotif() {
       </div>
     </a>
     <!-- Share Modal -->
-    <transition name="fade">
+    <transition name="zoomfade">
       <div
           v-if="showShare"
           class="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 px-4"
@@ -715,7 +738,7 @@ async function submitNotif() {
     </transition>
 
     <!-- Notification Bottom Sheet (mobile) / Centered Dialog (desktop) -->
-    <transition name="slide">
+    <transition name="zoomfade">
       <div v-if="showNotif" class="fixed inset-0 z-[60]" aria-modal="true" role="dialog" aria-label="알림 구독">
         <!-- backdrop -->
         <div class="absolute inset-0 bg-black/60" @click="closeNotif"></div>
@@ -772,23 +795,27 @@ async function submitNotif() {
 </template>
 
 <style scoped>
-/* Fade for overlay */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.18s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+/***** Premium subtle animations *****/
+/* Header smooth transitions */
+.header-smooth { transition: background-color 200ms ease, backdrop-filter 200ms ease, box-shadow 200ms ease; }
 
-/* Slide for mobile panel */
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.22s ease;
+/* Hero Ken Burns background */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
 }
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateY(100%);
-}
+.hero-kenburns { animation: kenburns 16s linear forwards; }
+
+/* Hero staggered items */
+.hero-item { transition: opacity 700ms ease-out, transform 700ms ease-out; will-change: transform, opacity; }
+
+/* Zoom-fade for modals */
+.zoomfade-enter-active, .zoomfade-leave-active { transition: opacity 180ms ease, transform 180ms ease; }
+.zoomfade-enter-from, .zoomfade-leave-to { opacity: 0; transform: scale(0.96); }
+
+/* Kakao floating button idle pulse */
+@keyframes idlePulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.kakao-idle { animation: idlePulse 5s ease-in-out infinite; }
+
+/* Remove old slide/fade docs (replaced by zoomfade) */
 </style>
