@@ -1,23 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 // For social share previews (Open Graph/Twitter), build absolute URLs based on deployment host.
-const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL || 'https://leesungki.github.io'
-const BASE = '/social_it/'
+// Configure via environment for flexible deployments (GitHub Pages subpath vs custom domain root)
+const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL || 'https://social-it.store'
+const BASE = process.env.NUXT_APP_BASE || process.env.NUXT_PUBLIC_BASE || '/'
 const FULL_URL = `${SITE_URL}${BASE}`
 const OG_IMAGE = `${FULL_URL}images/logo.png`
 // Cache-bust for social scrapers (Kakao, Facebook, etc.)
 const OG_IMAGE_VERSION = `${OG_IMAGE}?v=20251213`
-const FAVICON = `${FULL_URL}favicon.ico`
+// Use relative favicon to current origin to avoid mixed-content on HTTPS
+const FAVICON = `${BASE}favicon.ico`
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/animations.css'],
-  ssr: false,  // 추가
+  ssr: false,  // SPA mode
   app: {
-    baseURL: BASE,   // ★ 저장소 이름
-    buildAssetsDir: '/_nuxt/', // 기본값이지만 명시해도 됨
+    baseURL: BASE,   // Controlled by env; '/' for custom domain, '/social_it/' for repo pages
+    buildAssetsDir: '/_nuxt/', // default but explicit
     head: {
       title: "SOCIAL IT - Social Matching Party",
       meta: [
@@ -47,7 +49,7 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: FULL_URL },
         { rel: 'icon', type: 'image/x-icon', href: FAVICON },
         { rel: 'shortcut icon', type: 'image/x-icon', href: FAVICON },
-        { rel: 'apple-touch-icon', href: OG_IMAGE },
+        { rel: 'apple-touch-icon', href: `${BASE}images/logo.png` },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Pen+Script&display=swap'
