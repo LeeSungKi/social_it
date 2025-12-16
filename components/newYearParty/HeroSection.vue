@@ -40,7 +40,7 @@
       <img
         alt="New Year Toast"
         class="absolute inset-0 w-full h-full object-cover"
-        src="https://page.gensparksite.com/slides_images/549d4f9e643f742f4b7c7c8fee8608f9.webp"
+        src="/images/logo.png"
         style="object-position: center bottom;"
       />
       <!-- Gradient Overlay Simulation (using solid color with opacity) -->
