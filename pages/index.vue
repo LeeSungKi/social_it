@@ -579,7 +579,8 @@ async function submitNotif() {
               :key="idx"
               :href="c.disabled ? undefined : c.href"
               class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30"
-              :class="c.disabled ? 'pointer-events-none opacity-60' : ''"
+              :class="c.disabled ? 'pointer-events-none opacity-60 cursor-not-allowed' : ''"
+              :aria-disabled="c.disabled ? 'true' : 'false'"
               aria-label="meeting card"
               v-reveal.up="{ delay: idx * 80 }"
           >
@@ -593,6 +594,8 @@ async function submitNotif() {
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/20"></div>
             <!-- subtle hover darken overlay -->
             <div class="absolute inset-0 bg-black/0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            <!-- disabled overlay to prevent mistaken selection -->
+            <div v-if="c.disabled" class="absolute inset-0 bg-black/60"></div>
 
             <!-- badge -->
             <div v-if="c.badge" class="absolute top-5 left-5">
