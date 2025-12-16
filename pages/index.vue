@@ -13,6 +13,8 @@ import { useRoute } from 'vue-router'
 // --- state
 const mobileOpen = ref(false)
 const scrolled = ref(false)
+// Timer for intro slideshow (declare early to avoid TDZ)
+let introTimer: any = null
 
 const route = useRoute()
 
@@ -98,21 +100,20 @@ function toggleShowAllMeetings() {
 
 // 이미지 경로는 기존 자산에 맞춰 교체하세요.
 const images = {
-  hero: '/images/bg.png',
-  fristParty: '/images/main.jpeg',
-  cafe: '/images/main.jpeg',
-  hof: '/images/main.jpeg',
-  travel: '/images/main.jpeg',
-  review1: '/images/main.jpeg',
-  review2: '/images/main.jpeg',
-  review3: '/images/main.jpeg',
-  logo: '/images/logo2.png',
+  hero: withBase('/images/bg.png'),
+  fristParty: withBase('/images/main.jpeg'),
+  cafe: withBase('/images/main.jpeg'),
+  hof: withBase('/images/main.jpeg'),
+  travel: withBase('/images/main.jpeg'),
+  review1: withBase('/images/main.jpeg'),
+  review2: withBase('/images/main.jpeg'),
+  review3: withBase('/images/main.jpeg'),
+  logo: withBase('/images/logo2.png'),
 }
 
 // BRAND INTRO 슬라이드 (001.png, 002.png, 003.png)
-const introSlides = ['/images/001.png', '/images/002.png', '/images/003.png']
+const introSlides = [withBase('/images/001.png'), withBase('/images/002.png'), withBase('/images/003.png')]
 const introIndex = ref(0)
-let introTimer: any
 
 function nextIntro() {
   introIndex.value = (introIndex.value + 1) % introSlides.length
@@ -213,6 +214,13 @@ const headerClass = computed(() => {
 const runtimeCfg = useRuntimeConfig?.() as any
 const publicCfg = (runtimeCfg && runtimeCfg.public) ? runtimeCfg.public : {}
 const subscribeEndpoint: string = (publicCfg && publicCfg.subscribeEndpoint) || '/.netlify/functions/subscribe'
+
+// ---- Helper to prefix baseURL for GitHub Pages (/social_it/) ----
+function withBase(path: string) {
+  const cfg = (useRuntimeConfig?.() as any) || {}
+  const base = cfg?.app?.baseURL ? String(cfg.app.baseURL) : '/'
+  return `${base.replace(/\/$/, '')}${path}`
+}
 
 // ---- Share modal state & helpers ----
 const showShare = ref(false)

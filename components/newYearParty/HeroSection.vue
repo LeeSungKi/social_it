@@ -40,7 +40,7 @@
       <img
         alt="New Year Toast"
         class="absolute inset-0 w-full h-full object-cover"
-        src="/images/logo.png"
+        :src="withBase('/images/logo.png')"
         style="object-position: center bottom;"
       />
       <!-- Gradient Overlay Simulation (using solid color with opacity) -->
@@ -96,6 +96,15 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const runtimeCfg = useRuntimeConfig()
+const appCfg = runtimeCfg.app
+function withBase(path: string) {
+  const base = (appCfg && appCfg.baseURL) ? (appCfg.baseURL as string) : '/'
+  return `${base.replace(/\/$/, '')}${path}`
+}
+</script>
 
 <style scoped>
 .search-bar { box-shadow: 4px 4px 0px rgba(0,0,0,0.1); }

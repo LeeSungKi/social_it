@@ -2,7 +2,7 @@
   <section class="relative bg-[#111] font-['Noto_Sans_KR']">
     <!-- Top Background Image -->
     <div class="bg-image-wrapper">
-      <img class="bg-image" alt="People toasting drinks" src="/images/logo.png" />
+      <img class="bg-image" alt="People toasting drinks" :src="withBase('/images/logo.png')" />
       <div class="overlay-fade"></div>
       <!-- Floating Bubbles -->
       <div class="bubble bubble-md bubble-1"><p class="text-center leading-tight">다양한<br/>생각</p></div>
@@ -63,6 +63,15 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const runtimeCfg = useRuntimeConfig()
+const appCfg = runtimeCfg.app
+function withBase(path: string) {
+  const base = (appCfg && appCfg.baseURL) ? (appCfg.baseURL as string) : '/'
+  return `${base.replace(/\/$/, '')}${path}`
+}
+</script>
 
 <style scoped>
 .bg-image-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 55%; overflow: hidden; z-index: 0; }
