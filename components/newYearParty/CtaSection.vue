@@ -36,7 +36,7 @@
       <div class="flex gap-4">
         <a
           class="cta-button male-btn"
-          href="https://forms.gle/uoWuLYuqofozUGiC9"
+          href="https://forms.gle/uMXrT8X6uRsqUMn39"
           target="_blank"
           rel="noopener"
           aria-label="남성 신청 구글 폼"
@@ -45,7 +45,7 @@
         </a>
         <a
           class="cta-button female-btn"
-          href="https://forms.gle/GjNHwwzKwiseshdB8"
+          href="https://forms.gle/EFi7iTYKMkjyWaWBA"
           target="_blank"
           rel="noopener"
           aria-label="여성 신청 구글 폼"

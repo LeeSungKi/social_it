@@ -451,13 +451,13 @@ async function submitNotif() {
             >
               <a
                   href="#meetings"
-                  class="inline-flex items-center justify-center rounded-full bg-white text-black px-7 py-3.5 text-base font-semibold hover:bg-white/90 transition"
+                  class="inline-flex items-center justify-center rounded-full bg-white text-black px-7 py-3.5 text-base font-semibold hover:bg-white/50 transition"
               >
                 파티 둘러보기
               </a>
               <a
                   href="#reviews"
-                  class="inline-flex items-center justify-center rounded-full bg-white/10 border border-white/15 px-7 py-3.5 text-base font-semibold text-white hover:bg-white/15 transition"
+                  class="inline-flex items-center justify-center rounded-full bg-black border border-white/15 px-7 py-3.5 text-base font-semibold text-white hover:bg-white/50 transition"
               >
                 후기 보기
               </a>
