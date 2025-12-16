@@ -80,7 +80,7 @@ onBeforeUnmount(() => {
 
 // --- content (keep image paths flexible)
 const brand = {
-  name: 'Social It',
+  name: 'SOCIAL IT',
   tagline: 'No.1 소셜링 파티',
 }
 
@@ -164,7 +164,7 @@ const meetingCards = [
   {
     title: '굿바이 2025 , 웰컴 2026 [인연 파티]',
     desc: '신년 카운트 다운과 함께하는 따뜻한 소셜링',
-    href: '/newYearParty',
+    href: withBase('/newYearParty'),
     img: images.cafe,
     badge: '진행중',
   },
@@ -326,7 +326,7 @@ async function submitNotif() {
       <!-- Background Image -->
       <img
           :src="images.hero"
-          alt="Social It Hero"
+          alt="SOCIAL IT Hero"
           class="absolute inset-0 w-full h-full object-cover object-top"
       />
 
@@ -359,7 +359,7 @@ async function submitNotif() {
 
             <!-- Logo: centered on mobile, left on desktop -->
             <NuxtLink to="/" class="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 shrink-0 flex items-center gap-3" aria-label="Home" @click="onLogoClick">
-              <img :src="images.logo" class="h-8 w-auto" alt="Social It" />
+              <img :src="images.logo" class="h-8 w-auto" alt="SOCIAL IT" />
               <span class="hidden sm:inline text-sm font-semibold tracking-wide">{{ brand.name }}</span>
             </NuxtLink>
 
@@ -423,7 +423,7 @@ async function submitNotif() {
             </p>
 
             <h1 class="mt-6 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter font-serif">
-              Social It
+              {{ brand.name }}
             </h1>
             <p class="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/95 font-medium">
               감각적인 공간에서 시작되는 새로운 만남.<br />
@@ -642,7 +642,7 @@ async function submitNotif() {
       <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid md:grid-cols-2 gap-8 items-center">
         <!-- Left: Company info -->
         <div class="text-[11px] sm:text-xs md:text-sm leading-relaxed text-white/70 text-center md:text-left">
-          <p class="text-white/90 font-semibold text-sm md:text-base">Social It</p>
+          <p class="text-white/90 font-semibold text-sm md:text-base">SOCIAL IT</p>
           <p class="mt-2">
             Re:teev · 사업자 번호: 669-71-00361 · TEL: 010-8797-8256
           </p>
@@ -653,7 +653,7 @@ async function submitNotif() {
         </div>
         <!-- Right: Logo (desktop only) -->
         <div class="hidden md:flex justify-end">
-          <img :src="images.logo" alt="Social It" class="h-10 w-auto opacity-80" />
+          <img :src="images.logo" alt="SOCIAL IT" class="h-10 w-auto opacity-80" />
         </div>
       </div>
     </footer>
