@@ -362,9 +362,8 @@ async function submitNotif() {
             </button>
 
             <!-- Logo: centered on mobile, left on desktop -->
-            <NuxtLink to="/" class="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 shrink-0 flex items-center gap-3" aria-label="Home" @click="onLogoClick">
-              <img :src="images.logo" class="h-8 w-auto" alt="SOCIAL IT" />
-              <span class="hidden sm:inline text-sm font-semibold tracking-wide">{{ brand.name }}</span>
+            <NuxtLink to="/" class="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 shrink-0 flex items-center" aria-label="Home" @click="onLogoClick">
+              <span class="text-base sm:text-lg font-semibold tracking-wide">{{ brand.name }}</span>
             </NuxtLink>
 
             <!-- Mobile: right Notification button -->
