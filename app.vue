@@ -1,7 +1,9 @@
 <template>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-// Minimal app shell. All routes are rendered via pages/.
+// App shell with layouts enabled so pages render within layouts/site.vue
 </script>

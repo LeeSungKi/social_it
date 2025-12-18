@@ -70,7 +70,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/', '/newYearParty']
+      routes: ['/', '/socialings/new-year-party']
     }
   }
 })
