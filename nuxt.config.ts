@@ -21,9 +21,9 @@ export default defineNuxtConfig({
     baseURL: BASE,   // Controlled by env; '/' for custom domain, '/social_it/' for repo pages
     buildAssetsDir: '/_nuxt/', // default but explicit
     head: {
-      title: "SOCIAL IT - Social Matching Party",
+      title: "SOCIAL IT",
       meta: [
-        { name: 'description', content: "SOCIAL IT - 감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
+        { name: 'description', content: "감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
         // Open Graph
         { property: 'og:title', content: 'SOCIAL IT - Social Matching Party' },
         { property: 'og:description', content: "SOCIAL IT - 감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
@@ -39,8 +39,8 @@ export default defineNuxtConfig({
         { property: 'og:updated_time', content: new Date().toISOString() },
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'SOCIAL IT - Social Matching Party' },
-        { name: 'twitter:description', content: "SOCIAL IT - 감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
+        { name: 'twitter:title', content: 'SOCIAL IT' },
+        { name: 'twitter:description', content: "감각적인 소셜 매칭 파티. 일정 확인과 신청, 위치 안내 및 소식 구독" },
         { name: 'twitter:url', content: FULL_URL },
         { name: 'twitter:image', content: OG_IMAGE_VERSION },
         { name: 'twitter:image:alt', content: 'SOCIAL IT 로고' },
