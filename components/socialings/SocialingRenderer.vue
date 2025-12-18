@@ -39,8 +39,8 @@ const normalized = computed(() =>
       :is="sectionMap[s.key]"
       :key="i + '-' + s.key"
       v-bind="s.props"
-      v-reveal="s.reveal === 'down' ? 'down' : undefined"
-      v-reveal.up="s.reveal === 'up' ? { delay: s.delay } : undefined"
+      v-reveal="s.reveal === 'down' ? { direction: 'down', once: true } : undefined"
+      v-reveal.up="s.reveal === 'up' ? { delay: s.delay, once: true } : undefined"
     />
   </div>
 </template>

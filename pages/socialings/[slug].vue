@@ -2,7 +2,7 @@
   <div class="w-full min-h-screen bg-gray-900">
     <main class="w-full bg-[#111] text-white font-['Noto_Sans_KR']">
       <template v-if="config">
-        <SocialingRenderer :sections="config.sections" />
+        <SocialingRenderer :key="slug" :sections="config.sections" />
       </template>
       <div v-else class="px-6 py-24 text-center">
         <p class="text-sm text-white/60">존재하지 않는 소셜링입니다.</p>

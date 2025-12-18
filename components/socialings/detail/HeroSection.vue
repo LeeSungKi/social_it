@@ -15,9 +15,7 @@ const props = defineProps<{
 
 // Cross-fade slideshow (prefer props)
 const slidesRaw = computed(() => props.slides && props.slides.length ? props.slides : [
-  '/images/newYearParty/newYearParty01.png',
-  '/images/newYearParty/newYearParty02.png',
-  '/images/newYearParty/newYearParty03.png',
+  '/images/main.jpeg'
 ])
 const slides = computed(() => slidesRaw.value.map((p) => withBase(p)))
 
@@ -66,7 +64,7 @@ onBeforeUnmount(() => { stop() })
 
 <template>
   <section
-    class="relative w-full h-[360px] sm:h-[420px] md:h-[520px] lg:h-[600px] overflow-hidden select-none"
+    class="relative w-full h-[260px] sm:h-[420px] md:h-[520px] lg:h-[600px] overflow-hidden select-none"
     @mouseenter="stop"
     @mouseleave="start"
     @touchstart.passive="handleTouchStart"

@@ -52,12 +52,12 @@ export default defineNuxtPlugin((nuxtApp) => {
     const rootMargin = value.rootMargin ?? '0px 0px -10% 0px' // trigger slightly before fully visible
     const threshold = value.threshold ?? 0.15
 
-    // If element is initially in viewport before any scroll happened, reveal immediately (no re-anim needed)
+    // If element is initially in viewport, reveal immediately (independent of scroll state)
     try {
       const rect = el.getBoundingClientRect()
       const vh = typeof window !== 'undefined' ? window.innerHeight : 0
       const initiallyVisible = rect.top < vh && rect.bottom > 0
-      if (initiallyVisible && !startedScroll) {
+      if (initiallyVisible) {
         el.classList.add('is-revealed')
         if (once) return // don't need observer
       }
