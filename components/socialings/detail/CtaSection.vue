@@ -19,7 +19,7 @@ const femaleUrl = props.femaleForm || 'https://forms.gle/EFi7iTYKMkjyWaWBA'
             aria-label="남성 신청"
             class="inline-flex items-center justify-center rounded-2xl bg-blue-500 text-white px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-extrabold tracking-tight shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:bg-blue-400 transition flex-1 min-w-[140px] sm:min-w-[180px]"
           >
-            <span class="mr-2">남성 신청</span>
+            <span class="mr-2">남성</span>
             <i class="fas fa-mars text-xl md:text-2xl"></i>
           </a>
           <a
@@ -29,7 +29,7 @@ const femaleUrl = props.femaleForm || 'https://forms.gle/EFi7iTYKMkjyWaWBA'
             aria-label="여성 신청"
             class="inline-flex items-center justify-center rounded-2xl bg-pink-500 text-white px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-extrabold tracking-tight shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] hover:bg-pink-400 transition flex-1 min-w-[140px] sm:min-w-[180px]"
           >
-            <span class="mr-2">여성 신청</span>
+            <span class="mr-2">여성</span>
             <i class="fas fa-venus text-xl md:text-2xl"></i>
           </a>
         </div>

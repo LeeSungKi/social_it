@@ -70,9 +70,17 @@ const headerClass = computed(() =>
 
 // ---- Share modal state & helpers ----
 const showShare = ref(false)
-const shareLink = (typeof location !== 'undefined' ? location.href : '')
+// Reactive current page URL for sharing (updates when route changes)
+const shareLink = computed(() => {
+  // make it reactive to navigation
+  void route.fullPath
+  if (typeof window !== 'undefined' && window.location) {
+    return window.location.href
+  }
+  return ''
+})
 const qrUrl = computed(() => {
-  const encoded = encodeURIComponent(shareLink)
+  const encoded = encodeURIComponent(shareLink.value)
   return `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encoded}`
 })
 const shareQrLoading = ref(true)
@@ -90,10 +98,10 @@ function closeShare() {
 }
 async function copyShareLink() {
   try {
-    await navigator.clipboard.writeText(shareLink)
+    await navigator.clipboard.writeText(shareLink.value)
     alert('링크가 복사되었습니다.')
   } catch {
-    try { window.prompt('아래 링크를 복사하세요', shareLink) } catch {}
+    try { window.prompt('아래 링크를 복사하세요', shareLink.value) } catch {}
   }
 }
 async function saveQrPng() {

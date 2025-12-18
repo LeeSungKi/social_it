@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, watch, computed } from 'vue'
 
 function withBase(path: string) {
   const cfg = (useRuntimeConfig?.() as any) || {}
@@ -19,6 +19,55 @@ const defaultImages = [
 // Expand/collapse state (initially collapsed)
 const expanded = ref(false)
 const contentId = 'desc-content'
+
+// Dynamic height measurement to avoid clipping when expanded
+const contentEl = ref<HTMLElement | null>(null)
+const collapsedHeight = '160px'
+const measuredHeight = ref(0)
+const maxHeightPx = computed(() => (expanded.value ? `${measuredHeight.value}px` : collapsedHeight))
+let ro: ResizeObserver | null = null
+
+function measure() {
+  const el = contentEl.value
+  if (!el) return
+  try {
+    // scrollHeight provides full content height regardless of current max-height
+    measuredHeight.value = el.scrollHeight
+  } catch {}
+}
+
+function onImgLoad() {
+  // Recalculate after images load
+  nextTick(() => measure())
+}
+
+onMounted(() => {
+  nextTick(() => {
+    measure()
+    if (contentEl.value && 'ResizeObserver' in window) {
+      ro = new ResizeObserver(() => {
+        // Only matters when expanded, but measuring is cheap
+        measure()
+      })
+      ro.observe(contentEl.value)
+    }
+    try { contentEl.value?.addEventListener('load', onImgLoad, true) } catch {}
+  })
+})
+
+onBeforeUnmount(() => {
+  if (contentEl.value) {
+    try { contentEl.value.removeEventListener('load', onImgLoad, true) } catch {}
+  }
+  if (ro && contentEl.value) {
+    try { ro.unobserve(contentEl.value) } catch {}
+    try { ro.disconnect() } catch {}
+  }
+  ro = null
+})
+
+// Also re-measure when data changes or when expanding
+watch(() => [props.html, props.images, expanded.value], () => nextTick(() => measure()))
 </script>
 
 <template>
@@ -30,8 +79,9 @@ const contentId = 'desc-content'
         <!-- Collapsible wrapper: html + images inside -->
         <div
           :id="contentId"
+          ref="contentEl"
           class="space-y-5 overflow-hidden transition-[max-height] duration-500 ease-in-out"
-          :style="{ maxHeight: expanded ? '3000px' : '160px' }"
+          :style="{ maxHeight: maxHeightPx }"
         >
           <!-- Prefer config-provided HTML -->
           <div v-if="props.html" class="space-y-5" v-html="props.html"></div>
@@ -46,6 +96,7 @@ const contentId = 'desc-content'
               :src="img"
               :alt="'파티 이미지 ' + (i+1)"
               class="w-full rounded-2xl border border-white/10"
+              @load="onImgLoad"
             />
           </div>
         </div>
