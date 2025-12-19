@@ -22,7 +22,7 @@ const contentId = 'desc-content'
 
 // Dynamic height measurement to avoid clipping when expanded
 const contentEl = ref<HTMLElement | null>(null)
-const collapsedHeight = '160px'
+const collapsedHeight = '760px'
 const measuredHeight = ref(0)
 const maxHeightPx = computed(() => (expanded.value ? `${measuredHeight.value}px` : collapsedHeight))
 let ro: ResizeObserver | null = null
@@ -104,12 +104,14 @@ watch(() => [props.html, props.images, expanded.value], () => nextTick(() => mea
         <!-- Toggle button -->
         <button
           type="button"
-          class="mt-4 inline-flex items-center justify-center rounded-full bg-white/10 border border-white/15 px-5 py-2.5 text-sm sm:text-base font-extrabold hover:bg-white/15 transition"
+          class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-white text-slate-900 px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 text-sm sm:text-base md:text-lg font-extrabold shadow-lg hover:shadow-xl hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition"
           @click="expanded = !expanded"
           :aria-expanded="expanded ? 'true' : 'false'"
           :aria-controls="contentId"
         >
-          {{ expanded ? '접기' : '더보기' }}
+          <span>{{ expanded ? '접기' : '더보기' }}</span>
+          <svg v-if="!expanded" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 14a1 1 0 0 1-.707-.293l-5-5a1 1 0 1 1 1.414-1.414L10 11.586l4.293-4.293a1 1 0 1 1 1.414 1.414l-5 5A1 1 0 0 1 10 14z" clip-rule="evenodd"/></svg>
+          <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 6a1 1 0 0 1 .707.293l5 5a1 1 0 1 1-1.414 1.414L10 8.414 5.707 12.707a1 1 0 0 1-1.414-1.414l5-5A1 1 0 0 1 10 6z" clip-rule="evenodd"/></svg>
         </button>
       </div>
     </div>
