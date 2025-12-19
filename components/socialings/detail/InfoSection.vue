@@ -20,7 +20,11 @@ const directionsUrl = computed(() =>
 async function copyAddress() {
   try {
     await navigator.clipboard.writeText(address.value)
-  } catch (e) {}
+    alert('주소가 복사되었습니다.')
+  } catch (e) {
+    console.error(e)
+    alert('복사에 실패했습니다. 다시 시도해 주세요.')
+  }
 }
 </script>
 
@@ -29,7 +33,7 @@ async function copyAddress() {
     <div class="w-full max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6">
       <h2 class="text-lg sm:text-xl md:text-2xl font-semibold">참가 안내</h2>
       <ul class="mt-3 space-y-2 text-sm sm:text-[15px] md:text-base text-white/85">
-        <li class="flex gap-2"><span class="text-white/50">•</span> 사전 신청 후 입금 화인 되면 확정 문자 발송됩니다.</li>
+        <li class="flex gap-2"><span class="text-white/50">•</span> 사전 신청 후 입금 확인 되면 확정 문자 발송됩니다.</li>
         <li class="flex gap-2"><span class="text-white/50">•</span> 남녀 비율 1:1로 조율합니다.</li>
         <li class="flex gap-2"><span class="text-white/50">•</span> 주류/음료는 자유롭게 이용 가능합니다.</li>
         <li class="flex gap-2"><span class="text-white/50">•</span> 혼자 오셔도 부담 없는 프로그램으로 진행됩니다.</li>
