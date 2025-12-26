@@ -177,6 +177,16 @@ async function submitNotif() {
 
 <template>
   <div class="w-full bg-black text-white font-sans min-h-screen">
+    <!-- GTM noscript - body 직후 위치 -->
+    <noscript>
+      <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-N9FVT3KW"
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
+
     <!-- HEADER (fixed) -->
     <header class="fixed top-0 left-0 w-full z-50 header-smooth" :class="headerClass">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
